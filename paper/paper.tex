@@ -20,6 +20,7 @@
 
 % This assumes your files are encoded as UTF8
 \usepackage[utf8]{inputenc}
+\usepackage{subcaption}
 
 % This is not strictly necessary, and may be commented out,
 % but it will improve the layout of the manuscript,
@@ -123,8 +124,8 @@ A simple search over the number of papers which have the term ``grounding'' quic
 
 To filter through these papers, we propose a method which selects the most relevant papers within a conference to the word ``grounding''. We take a naive approach where we select the top 10\% of papers with the word ``grounding''. We determine which papers are more important to ``grounding'' based on the word frequency, if ``grounding'' appears more often compared to other words within a paper, then it should be more relevant. This process (while ensuring uniqueness across conferences) resulted in 46 curated papers\footnote{\url{https://git.uwaterloo.ca/e48huang/cs-784/-/blob/e09a1c22c0de7e331ca16109a5f32b226dc6d9c5/final_project/grounding_top_p.txt}}, spanning from the years 2000 to 2024, shown in the following figure. While this selection of papers may not cover the breadth of senses of grounding might entail, as it misses on papers from the 1980's to 2000's, it does cover the most commonly used senses of the word.
 
-\begin{figure}[t]
-  \includegraphics[width=\columnwidth]{years_histogram.png}
+\begin{figure}[h]
+  \includegraphics[width=\columnwidth]{figs/years_histogram.png}
   \caption{Count of selected conference papers per year}
   \label{fig:conference_years}
 \end{figure}
@@ -178,10 +179,29 @@ This term of ``dialogue grounding'' is loosely defined, usually seen in literatu
 \subsection{Physical Dynamics Grounding}
 Attempting to model physical dynamics purely from states and its transitions tend to be difficult, requiring a ton of resources to supervise consecutive particle properties. Instead of requiring this supervision, a new field has emerged to attempt to understand these physical dynamics from visual observations \cite{NEURIPS2024_neuma_material_visual_grounding}. One such application is in fluid dynamics grounding; which attempts to build an understanding of fluid particle systems from sequential visual observations \cite{guan2022neurofluidfluiddynamicsgrounding}. 
 
-\section{How has ``grounding'' evolved over time?}
-In this section, we will take each previous section's meaning of ``grounding'' and build an understanding of its trends through observing the co-occurrence over time with other key words for each specific sense.
+\section{Analyzing ``grounding'''s usage}
+In this section, we will build a quantitative understanding of ``grounding'' and its senses over time. We will explore how the word has been used throughout the years, and dive deeper into a few senses of the word. We will accomplish this through observing the co-occurrence trends over time with other key words for each specific sense.
 
-\subsection{Terminology}
+\subsection{How has ``grounding'' evolved over time?}
+In this section, we explore how the term ``grounding'' has evolved over time through analyzing how many papers have included the term ``grounding''. We aggregate over all the data splits while showcasing a more fine-grained example for a specific conference to avoid any patterns lost through aggregation.
+
+In particular, we observe that the number of instances of ``grounding'' has increased both in terms of pure count and frequency over time (see Fig~\ref{fig:all_confs_count} and Fig~\ref{fig:all_confs_freq}). Due to the number of papers being published in general, we need to normalize for this factor and measure the proportion of papers which include ``grounding''. Because the pure count and frequency have both increased over time, we conclude that ``grounding'' has been a terminology that is becoming more and more utilized, likely due to it becoming more relevant with the uprise of LLMs and a need to interpret and improve these models. We provide more analysis on this co-occurrence within the next section.
+
+\begin{figure}[h]
+  \includegraphics[width=\columnwidth]{figs/year_distribution/all_confs_grounding.png}
+  \caption{Count of ``grounding'' for all the conferences over time}
+  \label{fig:all_confs_count}
+\end{figure}
+
+\begin{figure}[h]
+  \includegraphics[width=\columnwidth]{figs/year_distribution_freq/all_confs_grounding_dist.png}
+  \caption{Frequency of papers containing the word ``grounding'' for all conferences over time}
+  \label{fig:all_confs_freq}
+\end{figure}
+
+To see how each individual conference's count and frequency changes over time, see Appendix~\ref{sec:appendix_years}.
+
+\subsection{}
 
 \subsubsection{Visual Grounding}
 TODO: Also explore why there are so many different ways to mean visual grounding. Also explore which datasets are most popular within these papers. Also, explore with removing IJCAI, as empirically it seems to have a lot of overlap with other conferences...
@@ -432,11 +452,20 @@ TODO: Also explore why there are so many different ways to mean visual grounding
 % Custom bibliography entries only
 \bibliography{custom}
 
-% \appendix
+\appendix
 
-% \section{Example Appendix}
-% \label{sec:appendix}
+\section{Distribution of years per conference}
+\label{sec:appendix_years}
+In Fig~\ref{fig:all_confs_count} and Fig~\ref{fig:all_confs_freq}, we only showed what the aggregated counts and frequency of ``grounding'' over time were, possibly hiding some trends. The following figures showcase that the individual conference trends follow the overall trend of increasing in both count and frequency over time.
 
-% This is an appendix.
+\begin{figure*}[h]
+  \includegraphics[width=\linewidth]{figs/year_distribution/split_by_conf_grounding_dist.png} 
+  \caption {Count of ``grounding'' for all conferences over time}
+\end{figure*}
+
+\begin{figure*}[h]
+  \includegraphics[width=\linewidth]{figs/year_distribution_freq/split_by_conf_grounding_dist.png} 
+  \caption {Frequency of papers containing the word ``grounding'' for all conferences over time}
+\end{figure*}
 
 \end{document}
